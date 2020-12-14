@@ -1,5 +1,6 @@
 import 'package:GreatPlacesApp/providers/places.dart';
 import 'package:GreatPlacesApp/screens/add_place.dart';
+import 'package:GreatPlacesApp/screens/place_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,8 +31,12 @@ class PlaceList extends StatelessWidget {
                         itemCount: places.items.length,
                         itemBuilder: (ctx, i) => ListTile(
                           leading: CircleAvatar(backgroundImage: FileImage(places.items[i].image)),
+                          subtitle: Text(places.items[i].location.address),
                           title: Text(places.items[i].title),
-                          onTap: null,
+                          onTap: () => Navigator.of(context).pushNamed(
+                            PlaceDetail.routeName,
+                            arguments: places.items[i].id,
+                          ),
                         ),
                       ),
               ),
